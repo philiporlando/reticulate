@@ -21,7 +21,7 @@ manager (__enter__ and __exit__ methods."><meta name="robots" content="noindex">
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reticulate</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.24-9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.34.0.9000</span>
       </span>
     </div>
 
@@ -30,7 +30,7 @@ manager (__enter__ and __exit__ methods."><meta name="robots" content="noindex">
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -95,21 +95,28 @@ manager</a> (<code>__enter__</code> and <code>__exit__</code> methods.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for python.builtin.object</span>
-<span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">expr</span>, as <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for python.builtin.object</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">expr</span>, as <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>Context to enter and exit</p></dd>
+
+
 <dt>expr</dt>
 <dd><p>Expression to evaluate within the context</p></dd>
+
+
 <dt>as</dt>
 <dd><p>Name of variable to assign context to for the duration of the
 expression's evaluation (optional).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Unused</p></dd>
+
 </dl></div>
 
   </div>
@@ -120,11 +127,11 @@ expression's evaluation (optional).</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Tomasz, Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reticulate</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.24-9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.34.0.9000</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -82,14 +82,196 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.25" id="reticulate-125-unreleased">reticulate 1.25 (UNRELEASED)<a class="anchor" aria-label="anchor" href="#reticulate-125-unreleased"></a></h2>
-<ul><li><p><code>use_python(, required = TRUE)</code> now issues a warning if the request will be ignored.</p></li>
+<h2 class="page-header" data-toc-text="development version" id="reticulate-development-version">reticulate (development version)<a class="anchor" aria-label="anchor" href="#reticulate-development-version"></a></h2>
+<ul><li><p>R external pointers (EXTPTRSXP objects) now round-trip through <code>py_to_r(r_to_py(x))</code> successfully. (reported in <a href="https://github.com/rstudio/reticulate/issues/1511" class="external-link">#1511</a>, fixed in <a href="https://github.com/rstudio/reticulate/issues/1519" class="external-link">#1519</a>, contributed by <a href="https://github.com/llaniewski" class="external-link">@llaniewski</a>).</p></li>
+<li><p>Fixed issue where <code><a href="../reference/virtualenv-tools.html">virtualenv_create()</a></code> would error on Ubuntu 22.04 when using the system python as a base. (<a href="https://github.com/rstudio/reticulate/issues/1495" class="external-link">#1495</a>, fixed in <a href="https://github.com/rstudio/reticulate/issues/1496" class="external-link">#1496</a>).</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.34.0" id="reticulate-1340">reticulate 1.34.0<small>2023-10-12</small><a class="anchor" aria-label="anchor" href="#reticulate-1340"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.33.0" id="reticulate-1330">reticulate 1.33.0<a class="anchor" aria-label="anchor" href="#reticulate-1330"></a></h2>
+<ul><li><p>Fixed issue where <code>asyncio</code>, (and modules that use <code>asyncio</code>), would error on Windows when running under RStudio (<a href="https://github.com/rstudio/reticulate/issues/1478" class="external-link">#1478</a>, <a href="https://github.com/rstudio/reticulate/issues/1479" class="external-link">#1479</a>).</p></li>
+<li><p>Added compatability with Python 3.12.</p></li>
+<li><p><code><a href="../reference/conda-tools.html">condaenv_exists()</a></code> is now exported.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.32.0" id="reticulate-1320">reticulate 1.32.0<small>2023-09-11</small><a class="anchor" aria-label="anchor" href="#reticulate-1320"></a></h2>
+<ul><li><p>reticulate now supports casting R data.frames to Pandas data.frames using nullable data types, allowing users to preserve NA’s from R atomic vectors. This feature is opt-in and can be enabled by setting the R option <code>reticulate.pandas_use_nullable_dtypes</code> to <code>TRUE</code>. (<a href="https://github.com/rstudio/reticulate/issues/1439" class="external-link">#1439</a>)</p></li>
+<li><p>reticulate now exports a <code><a href="https://rdrr.io/r/base/chooseOpsMethod.html" class="external-link">chooseOpsMethod()</a></code> method, allowing for Ops dispatch to more specialized Ops methods defined for Python objects.</p></li>
+<li><p><code><a href="../reference/py_discover_config.html">py_discover_config()</a></code> will now warn instead of error upon encountering a broken Python installation. (<a href="https://github.com/rstudio/reticulate/issues/1441" class="external-link">#1441</a>, <a href="https://github.com/rstudio/reticulate/issues/1459" class="external-link">#1459</a>)</p></li>
+<li><p>Fixed issue where Python would raise exception “OSError: [WinError 6] The handle is invalid” when opening a subprocess while running in Rstudio on Windows. (<a href="https://github.com/rstudio/reticulate/issues/1448" class="external-link">#1448</a>, <a href="https://github.com/rstudio/reticulate/issues/518" class="external-link">#518</a>)</p></li>
+<li><p>Fixed issue where the multiprocessing Python module would crash or hang when spawning a <code>Process()</code> on Windows. (<a href="https://github.com/rstudio/reticulate/issues/1430" class="external-link">#1430</a>, <a href="https://github.com/rstudio/reticulate/issues/1346" class="external-link">#1346</a>, fixed in <a href="https://github.com/rstudio/reticulate/issues/1461" class="external-link">#1461</a>)</p></li>
+<li><p>Fixed issue where <code><a href="../reference/virtualenv-tools.html">virtualenv_create()</a></code> would fail to discover a ‘virtualenv’ module in the system Python installation on Ubuntu. Reticulate will no longer discover and attempt to use the <code>venv</code> module stub present on Ubuntu systems where the <code>python3-venv</code> apt package has not been installed. (mlverse/pysparklyr#11, <a href="https://github.com/rstudio/reticulate/issues/1437" class="external-link">#1437</a>, <a href="https://github.com/rstudio/reticulate/issues/1455" class="external-link">#1455</a>)</p></li>
+<li><p>Fixed issue where the user was prompted to create an ‘r-reticulate’ venv in the RStudio IDE before reticulate was requested to initialize Python. (<a href="https://github.com/rstudio/reticulate/issues/1450" class="external-link">#1450</a>, <a href="https://github.com/rstudio/reticulate/issues/1456" class="external-link">#1456</a>)</p></li>
+<li><p>Improved error message when reticulate attempts to initialize a virtual environment after the Python installation it was created from is no longer available. (<a href="https://github.com/rstudio/reticulate/issues/1149" class="external-link">#1149</a>, <a href="https://github.com/rstudio/reticulate/issues/1457" class="external-link">#1457</a>)</p></li>
+<li><p>Improved error message on Fedora when attempting to create a virtual environment from the system python before running <code>dnf install python3-pip</code>.</p></li>
+<li><p>Fixed issue where <code><a href="../reference/install_python.html">install_python()</a></code> on macOS in the RStudio IDE would fail to discover and use brew for Python build dependencies.</p></li>
+<li><p>Fixed error with <code>virtualenv_create(python = "/usr/bin/python")</code> on centos7. (<a href="https://github.com/rstudio/reticulate/issues/1467" class="external-link">#1467</a>)</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.31" id="reticulate-131">reticulate 1.31<small>2023-08-10</small><a class="anchor" aria-label="anchor" href="#reticulate-131"></a></h2>
+<div class="section level3">
+<h3 id="python-installation-management-1-31">Python Installation Management<a class="anchor" aria-label="anchor" href="#python-installation-management-1-31"></a></h3>
+<ul><li><p>reticulate will no longer prompt users to install miniconda. Instead, reticulate will now prompt users to create a default <code>r-reticulate</code> venv.</p></li>
+<li><p>The search that reticulate conducts to select which Python installation to load has changed. See the updated Python “Order of Discover” in the “versions” vignette. <code><a href="../articles/versions.html">vignette("versions", package = "reticulate")</a></code>.</p></li>
+<li><p>Updated recommendations in the “python_dependencies” vignette for how R packages can approach Python dependency management. <code><a href="../articles/python_dependencies.html">vignette("python_dependencies", package = "reticulate")</a></code></p></li>
+<li><p>New function <code><a href="../reference/virtualenv-tools.html">virtualenv_starter()</a></code>, which can be used to find a suitable python binary for creating a virtual environmnent. This is now the default method for finding the python binary when calling <code>virtualenv_create(version = &lt;version&gt;)</code>.</p></li>
+<li><p><code><a href="../reference/virtualenv-tools.html">virtualenv_create()</a></code> and <code><a href="../reference/virtualenv-tools.html">virtualenv_install()</a></code> gain a <code>requirements</code> argument, accepting a filepath to a python requirements file.</p></li>
+<li><p><code><a href="../reference/virtualenv-tools.html">virtualenv_create()</a></code> gains a <code>force</code> argument.</p></li>
+<li><p><code><a href="../reference/virtualenv-tools.html">virtualenv_install()</a></code> gains a <code>python_version</code> argument, allowing users to customize which python version is used when bootstrapping a new virtual environment.</p></li>
+<li><p>Fixed an issue where the list of available python versions used by <code><a href="../reference/install_python.html">install_python()</a></code> would be out-of-date.</p></li>
+<li><p><code><a href="../reference/install_python.html">install_python()</a></code> now gives a better error message if git is not installed.</p></li>
+<li><p><code><a href="../reference/install_python.html">install_python()</a></code> on macOS will now will use brew, if it’s available, to install build dependencies, substantially speeding up python build times.</p></li>
+<li><p>New function <code><a href="../reference/conda-tools.html">conda_search()</a></code>, contributed by <a href="https://github.com/mkoohafkan" class="external-link">@mkoohafkan</a> in PR <a href="https://github.com/rstudio/reticulate/issues/1364" class="external-link">#1364</a>.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="language-1-31">Language<a class="anchor" aria-label="anchor" href="#language-1-31"></a></h3>
+<ul><li><p>New <code>[</code> and <code>[&lt;-</code> methods that invoke Python <code>__getitem__</code>, <code>__setitem__</code> and <code>__delitem__</code>. The R generics <code>[</code> and <code>[&lt;-</code> now accept python-style slice syntax like <code>x[1:2:3]</code>. See examples in <code><a href="../reference/py_get_item.html">?py_get_item</a></code>.</p></li>
+<li><p><code><a href="../reference/py_iterator.html">py_iterator()</a></code> gains a <code>prefetch</code> argument, primarily to avoid deadlocks where the main thread is blocked, waiting for the iterator, which is waiting to run on the main thread, as encountered in TensorFlow/Keras. (<a href="https://github.com/rstudio/reticulate/issues/1405" class="external-link">#1405</a>).</p></li>
+<li><p>String columns from Pandas data frames containing <code>None</code>, <code>pd.NA</code> or <code>np.nan</code> are now simplified into character vectors and missing values replaced by <code>NA</code> (<a href="https://github.com/rstudio/reticulate/issues/1428" class="external-link">#1428</a>).</p></li>
+<li><p>Converting from Pandas data frames containing columns with Pandas nullable data types are now correctly converted into R data.frames preserving the missing values (<a href="https://github.com/rstudio/reticulate/issues/1427" class="external-link">#1427</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="knitr-1-31">Knitr<a class="anchor" aria-label="anchor" href="#knitr-1-31"></a></h3>
+<ul><li>
+<p>The knitr engine gains a <code>jupyter_compat</code> option, enabling reticulate to better match the behavior of Jupyter. When this chunk option is set to <code>TRUE</code>, only the return value from the last expression in a chunk is auto-printed. (<a href="https://github.com/rstudio/reticulate/issues/1391" class="external-link">#1391</a>, <a href="https://github.com/rstudio/reticulate/issues/1394" class="external-link">#1394</a>, contributed by</p>
+<ol class="example" style="list-style-type: decimal"><li>
+</li></ol></li>
+<li><p>The knitr engine now more reliably detects and displays matplotlib pending plots, without the need for a matplotlib artist object to be returned as a top-level expression. E.g., the knitr engine will now display plots when the matplotlib api returns something other than an artist object, (<code>plt.bar()</code>), or the matplotlib return value is not auto-printed due to being assigned, (<code>x = plt.plot()</code>), or suppressed with a <code>;</code>, (<code>plt.plot();</code>). (<a href="https://github.com/rstudio/reticulate/issues/1391" class="external-link">#1391</a>, <a href="https://github.com/rstudio/reticulate/issues/1401" class="external-link">#1401</a>, contributed by 1)</p></li>
+<li><p>Fixed an issue where knitr engine would not respect chunk options <code>fig.width</code> / <code>fig.height</code> when rendering matplotlib plots. (<a href="https://github.com/rstudio/reticulate/issues/1398" class="external-link">#1398</a>)</p></li>
+<li><p>Fixed an issue where the reticulate knitr engine would not capture output printed from python. (PR <a href="https://github.com/rstudio/reticulate/issues/1412" class="external-link">#1412</a>, fixing <a href="https://github.com/rstudio/reticulate/issues/1378" class="external-link">#1378</a>, <a href="https://github.com/rstudio/reticulate/issues/331" class="external-link">#331</a>)</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="miscellanous-1-31">Miscellanous<a class="anchor" aria-label="anchor" href="#miscellanous-1-31"></a></h3>
+<ul><li><p>Reticulate now periodically flushes python <code>stdout</code> and <code>stderr</code> buffers even while the main thread is blocked executing Python code. Streaming output from a long-running Python function call will now appear in the R console while the Python function is still executing. (Previously, output might not appear until the Python function had finished and control of the main thread had returned to R).</p></li>
+<li><p>Updated sparse matrix conversion routines for compatibility with scipy 1.11.0.</p></li>
+<li><p>Fixed an issue where a py capsule finalizer could access the R API from a background thread. (<a href="https://github.com/rstudio/reticulate/issues/1406" class="external-link">#1406</a>)</p></li>
+<li><p>Fixed issue where R would segfault (crash) in long-lived R sessions where both rpy2 and reticulate were in use (<a href="https://github.com/rstudio/reticulate/issues/1236" class="external-link">#1236</a>).</p></li>
+<li><p>Fixed an issue where exceptions from reticulate would not be formatted properly when running tests under testthat (r-lib/rlang#1637, <a href="https://github.com/rstudio/reticulate/issues/1413" class="external-link">#1413</a>).</p></li>
+<li><p>Fixed an issue where <code>py_get_attr(silent = TRUE)</code> would not return an R <code>NULL</code>, if the attribute was missing, as documented. (<a href="https://github.com/rstudio/reticulate/issues/1413" class="external-link">#1413</a>)</p></li>
+<li><p>Fixed an issue where <code>py_get_attr(silent = TRUE)</code> would leave a python global exception set if the attribute was missing, resulting in fatal errors when running python under debug mode. (<a href="https://github.com/rstudio/reticulate/issues/1396" class="external-link">#1396</a>)</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.30" id="reticulate-130">reticulate 1.30<small>2023-06-09</small><a class="anchor" aria-label="anchor" href="#reticulate-130"></a></h2>
+<ul><li>Fix compilation error on R 3.5. Bump minimum R version dependency to 3.5.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.29" id="reticulate-129">reticulate 1.29<small>2023-06-05</small><a class="anchor" aria-label="anchor" href="#reticulate-129"></a></h2>
+<div class="section level4">
+<h4 id="exceptions-and-errors-1-29">Exceptions and Errors:<a class="anchor" aria-label="anchor" href="#exceptions-and-errors-1-29"></a></h4>
+<ul><li><p>R error information (call, message, other attributes) is now preserved as an R error condition traverses the R &lt;-&gt; Python boundary.</p></li>
+<li><p>Python Exceptions now inherit from <code>error</code> and <code>condition</code>, and can be passed directly to <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">base::stop()</a></code> to signal an error in R and raise an exception in Python.</p></li>
+<li><p>Raised Python Exceptions are now used directly to signal an R error. For example, in the following code, <code>e</code> is now an object that inherits from <code>python.builtin.Exception</code> as well as <code>error</code> and <code>condition</code>: <code>r     e &lt;- tryCatch(py_func_that_raises_exception(),                   error = function(e) e)</code> Use <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">base::conditionCall()</a></code> and <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">base::conditionMessage()</a></code> to access the original R call and error message.</p></li>
+<li><p><code><a href="../reference/py_last_error.html">py_last_error()</a></code> return object contains <code>r_call</code>, <code>r_trace</code> and/or <code>r_class</code> if the Python Exception was raised by an R function called from Python.</p></li>
+<li><p>The hint to run <code><a href="../reference/py_last_error.html">reticulate::py_last_error()</a></code> after an exception is now clickable in the RStudio IDE.</p></li>
+<li><p>Filepaths to Python files in the print output from <code><a href="../reference/py_last_error.html">py_last_error()</a></code> are now clickable links in the RStudio IDE.</p></li>
+<li><p>Python exceptions encountered in <code><a href="../reference/repl_python.html">repl_python()</a></code> are now printed with the full Python traceback by default. In the RStudio IDE, filepaths in the tracebacks are rendered as clickable links. (<a href="https://github.com/rstudio/reticulate/issues/1240" class="external-link">#1240</a>)</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="language-1-29">Language:<a class="anchor" aria-label="anchor" href="#language-1-29"></a></h4>
+<ul><li>
+<p>Converted Python callables gain support for dynamic dots from the rlang package. New features:</p>
+<ul><li>splicing (unpacking) arguments: <code>fn(!!!kwargs)</code>
+</li>
+<li>dynamic names: <code>nm &lt;- "key"; fn("{nm}" := value)</code>
+</li>
+<li>trailing commas ignored (matching Python syntax): <code>fn(a, )</code> identical to <code>fn(a)</code>
+</li>
+</ul></li>
 <li>
-<p><code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> changes (<a href="https://github.com/rstudio/reticulate/issues/1148" class="external-link">#1148</a>):</p>
-<ul><li>The default <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method for Python objects now invokes <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> instead of <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code>.</li>
-<li>All Python objects gain a default <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method.</li>
+<p>New Ops group generics for Python objects: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>%%</code>, <code>%/%</code>, <code>&amp;</code>, <code>|</code>, <code>!</code>, <code>%*%</code>. Methods for all the Ops group generics are now defined for Python objects. (<a href="https://github.com/rstudio/reticulate/issues/1187" class="external-link">#1187</a>, <a href="https://github.com/rstudio/reticulate/issues/1363" class="external-link">#1363</a>) E.g., this now works:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">np</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"numpy"</span>, convert <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">np</span><span class="op">$</span><span class="fu">array</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">np</span><span class="op">$</span><span class="fu">array</span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">+</span> <span class="va">y</span></span></code></pre></div>
+</li>
+<li>
+<p>Fixed two issues with R comparison operator methods (<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&gt;</code>):</p>
+<ul><li>The operators no longer error on Python objects that define “rich comparison” Python methods that don’t return a single bool. (e.g., numpy arrays).</li>
+<li>The operators now respect the ‘convert’ value of the supplied Python objects. Note, this may be a breaking change as, e.g, <code>==</code>, may now no long return an R scalar logical if one of the Python object being compared was created with <code>convert = FALSE</code>. Wrap the result of the comparison with <code><a href="../reference/py_bool.html">py_bool()</a></code> to restore the previous behavior. (<a href="https://github.com/rstudio/reticulate/issues/1187" class="external-link">#1187</a>, <a href="https://github.com/rstudio/reticulate/issues/1363" class="external-link">#1363</a>)</li>
+</ul></li>
+<li><p>R functions wrapping Python callables now have formals matching those of the Python callable signature, enabling better autocompletion in more contexts (<a href="https://github.com/rstudio/reticulate/issues/1361" class="external-link">#1361</a>).</p></li>
+<li><p>new <code><a href="https://rdrr.io/r/base/class.html" class="external-link">nameOfClass()</a></code> S3 method for Python types, enabling usage: <code>base::inherits(x, &lt;python-type-object&gt;)</code> (requires R &gt;= 4.3.0)</p></li>
+<li><p><code><a href="../reference/py_run.html">py_run_file()</a></code> and <code><a href="../reference/source_python.html">source_python()</a></code> now prepend the script directory to the Python module search path, <code>sys.path</code>, while the requested script is executing. This allows the Python scripts to resolve imports of modules defined in the script directory, matching the behavior of <code>python &lt;script&gt;</code> at the command line. (<a href="https://github.com/rstudio/reticulate/issues/1347" class="external-link">#1347</a>)</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="knitr-1-29">knitr:<a class="anchor" aria-label="anchor" href="#knitr-1-29"></a></h4>
+<ul><li><p>The knitr engine now suppresses warnings from Python code if <code>warning=FALSE</code> is set in the chunk options. (quarto-dev/quarto#125, <a href="https://github.com/rstudio/reticulate/issues/1358" class="external-link">#1358</a>)</p></li>
+<li><p>Fixed issue where reticulate’s knitr engine would attach comments in a code chunk to the wrong code chunk (requires Python&gt;=3.8) (<a href="https://github.com/rstudio/reticulate/issues/1223" class="external-link">#1223</a>).</p></li>
+<li><p>The knitr Python engine now respects the <code>strip.white</code> option (<a href="https://github.com/rstudio/reticulate/issues/1273" class="external-link">#1273</a>).</p></li>
+<li><p>Fixed issue where the knitr engine would show an additional plot from a chunk if the user called <code>matplotlib.pyplot.show()</code> (<a href="https://github.com/rstudio/reticulate/issues/1380" class="external-link">#1380</a>, <a href="https://github.com/rstudio/reticulate/issues/1383" class="external-link">#1383</a>)</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="misc-1-29">Misc:<a class="anchor" aria-label="anchor" href="#misc-1-29"></a></h4>
+<ul><li><p><code><a href="../reference/r-py-conversion.html">py_to_r()</a></code> now succeeds when converting subtypes of the built-in types (e.g. <code>list</code>, <code>dict</code>, <code>str</code>). (<a href="https://github.com/rstudio/reticulate/issues/1352" class="external-link">#1352</a>, <a href="https://github.com/rstudio/reticulate/issues/1348" class="external-link">#1348</a>, <a href="https://github.com/rstudio/reticulate/issues/1226" class="external-link">#1226</a>, <a href="https://github.com/rstudio/reticulate/issues/1354" class="external-link">#1354</a>, <a href="https://github.com/rstudio/reticulate/issues/1366" class="external-link">#1366</a>)</p></li>
+<li><p>New <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">pillar::type_sum()</a></code> method now exported for Python objects. That ensures the full object class name is printing in R tracebacks and tibbles containing Python objects.</p></li>
+<li><p><code><a href="../reference/py_save_object.html">py_load_object()</a></code> gains a <code>convert</code> argument. If <code>convert = FALSE</code>, the returned Python object will not be converted to an R object.</p></li>
+<li><p>Fixed error <code><a href="../reference/r-py-conversion.html">r_to_py()</a></code> with Pandas&gt;=2.0 and R data.frames with a factor column containing levels with <code>NA</code>.</p></li>
+<li><p><code><a href="../reference/r-py-conversion.html">r_to_py()</a></code> now succeeds for many additional types of R objects. Objects that reticulate doesn’t know how to convert are presented to the Python runtime as a pycapsule (an opaque pointer to the underlying R object). Previously this would error. This allows for R code to pass R objects that cannot be safely converted to Python through the Python runtime to other R code. (e.g, to an R function called by Python code). (<a href="https://github.com/rstudio/reticulate/issues/1304" class="external-link">#1304</a>)</p></li>
+<li><p>reticulate gains the ability to bind to micromamba Python installations (<a href="https://github.com/rstudio/reticulate/issues/1378" class="external-link">#1378</a>, <a href="https://github.com/rstudio/reticulate/issues/1176" class="external-link">#1176</a>, <a href="https://github.com/rstudio/reticulate/issues/1382" class="external-link">#1382</a>, <a href="https://github.com/rstudio/reticulate/issues/1379" class="external-link">#1379</a>, thanks to Zia Khan, <a href="https://github.com/zia1138" class="external-link">@zia1138</a>)</p></li>
+<li><p>Default Python version used by <code><a href="../reference/install_miniconda.html">install_miniconda()</a></code> and friends is now 3.9 (was 3.8).</p></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.28" id="reticulate-128">reticulate 1.28<small>2023-01-27</small><a class="anchor" aria-label="anchor" href="#reticulate-128"></a></h2>
+<ul><li><p>Fixed issue where <code><a href="../reference/source_python.html">source_python()</a></code> (and likely many other entrypoints) would error if reticulate was built with Rcpp 1.0.10. Exception and error handling has been updated to accommodate usage of <code>R_ProtectUnwind()</code>. (<a href="https://github.com/rstudio/reticulate/issues/1328" class="external-link">#1328</a>, <a href="https://github.com/rstudio/reticulate/issues/1329" class="external-link">#1329</a>).</p></li>
+<li><p>Fixed issue where reticulate failed to discover Python 3.11 on Windows. (<a href="https://github.com/rstudio/reticulate/issues/1325" class="external-link">#1325</a>)</p></li>
+<li><p>Fixed issue where reticulate would error by attempting to bind to a cygwin/msys2 installation of Python on Windows (<a href="https://github.com/rstudio/reticulate/issues/1325" class="external-link">#1325</a>).</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.27" id="reticulate-127">reticulate 1.27<small>2023-01-07</small><a class="anchor" aria-label="anchor" href="#reticulate-127"></a></h2>
+<ul><li><p><code><a href="../reference/py_run.html">py_run_file()</a></code> now ensures the <code>__file__</code> dunder is visible to the executing python code. (<a href="https://github.com/rstudio/reticulate/issues/1283" class="external-link">#1283</a>, <a href="https://github.com/rstudio/reticulate/issues/1284" class="external-link">#1284</a>)</p></li>
+<li><p>Fixed errors with <code><a href="../reference/install_miniconda.html">install_miniconda()</a></code> and <code><a href="../reference/conda-tools.html">conda_install()</a></code>, on Windows (<a href="https://github.com/rstudio/reticulate/issues/1286" class="external-link">#1286</a>, <a href="https://github.com/rstudio/reticulate/issues/1287" class="external-link">#1287</a>, conda/conda#11795, <a href="https://github.com/rstudio/reticulate/issues/1312" class="external-link">#1312</a>, <a href="https://github.com/rstudio/reticulate/issues/1297" class="external-link">#1297</a>), and on Linux and macOS (<a href="https://github.com/rstudio/reticulate/issues/1306" class="external-link">#1306</a>, conda/conda#10431)</p></li>
+<li><p>Fixed error when activating a conda env from a UNC drive on Windows (<a href="https://github.com/rstudio/reticulate/issues/1303" class="external-link">#1303</a>).</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.26" id="reticulate-126">reticulate 1.26<small>2022-08-31</small><a class="anchor" aria-label="anchor" href="#reticulate-126"></a></h2>
+<ul><li><p>Fixed issue where reticulate failed to bind to python2. (<a href="https://github.com/rstudio/reticulate/issues/1241" class="external-link">#1241</a>, <a href="https://github.com/rstudio/reticulate/issues/1229" class="external-link">#1229</a>)</p></li>
+<li><p>A warning is now issued when reticulate binds to python2 that python2 support will be removed in an upcoming reticulate release.</p></li>
+<li><p><code><a href="../reference/py_id.html">py_id()</a></code> now returns a character string, instead of an R integer (<a href="https://github.com/rstudio/reticulate/issues/1216" class="external-link">#1216</a>).</p></li>
+<li><p>Fixed an issue where <code><a href="../reference/r-py-conversion.html">py_to_r()</a></code> would not convert elements of a dictionary (<a href="https://github.com/rstudio/reticulate/issues/1221" class="external-link">#1221</a>).</p></li>
+<li><p>Fixed an issue where setting <code>RETICULATE_PYTHON</code> or <code>RETICULATE_PYTHON_FALLBACK</code> on Windows to the pyenv-win <code>python.bat</code> shim would result in an error (<a href="https://github.com/rstudio/reticulate/issues/1263" class="external-link">#1263</a>).</p></li>
+<li><p>Fixed an issue where <code>datetime.datetime</code> objects with a <code>tzinfo</code> attribute was not getting converted to R correctly (<a href="https://github.com/rstudio/reticulate/issues/1266" class="external-link">#1266</a>).</p></li>
+<li><p>Fixed an issue where pandas <code>pandas.Categorical(,ordered=True)</code> Series were not correctly converted to an R ordered factor (<a href="https://github.com/rstudio/reticulate/issues/1234" class="external-link">#1234</a>).</p></li>
+<li><p>The <code>reticulate</code> Python engine no longer halts on error for Python chunks containing parse errors when the <code>error=TRUE</code> chunk option is set. (<a href="https://github.com/rstudio/reticulate/issues/583" class="external-link">#583</a>)</p></li>
+<li><p><code><a href="../reference/install_python.html">install_python()</a></code> now leverages brew for python build dependencies like <a href="mailto:openssl@1.1" class="email">openssl@1.1</a> if brew is already installed and on the PATH, substantially speeding up <code><a href="../reference/install_python.html">install_python()</a></code> on macOS systems with brew configured.</p></li>
+<li><p>Fixed an issue where reticulate would fail to bind to a conda environment on macOS or linux if conda installed a non-POSIX compliant activation script into the conda environment. (<a href="https://github.com/rstudio/reticulate/issues/1255" class="external-link">#1255</a>)</p></li>
+<li><p>Fixed an issue where the python knitr engine would error when printing to HTML a constructor of class instances with a <code>_repr_html_</code> or <code>to_html</code> method (e.g., <code>pandas.DataFrame</code>; <a href="https://github.com/rstudio/reticulate/issues/1249" class="external-link">#1249</a>, <a href="https://github.com/rstudio/reticulate/issues/1250" class="external-link">#1250</a>).</p></li>
+<li><p>Fixed an issue where the python knitr engine would error when printing a plotly figure to an HTML document in some (head-less) linux environments (<a href="https://github.com/rstudio/reticulate/issues/1250" class="external-link">#1250</a>).</p></li>
+<li><p>Fixed an issue where <code>conda_install(pip=TRUE)</code> would install packages into a user Python library instead of the conda env if the environment variable <code>PIP_USER=true</code> was set. <code><a href="../reference/py_install.html">py_install()</a></code>, <code><a href="../reference/virtualenv-tools.html">virtualenv_install()</a></code>, and <code><a href="../reference/conda-tools.html">conda_install()</a></code> now always specify <code>--no-user</code> when invoking <code>pip install</code>. (<a href="https://github.com/rstudio/reticulate/issues/1209" class="external-link">#1209</a>)</p></li>
+<li><p>Fixed issue where <code><a href="../reference/py_last_error.html">py_last_error()</a></code> would return unconverted Python objects (<a href="https://github.com/rstudio/reticulate/issues/1233" class="external-link">#1233</a>)</p></li>
+<li><p>The Knitr engine now supports printing Python objects with <code>_repr_markdown_</code> methods. (via quarto-dev/quarto-cli#1501)</p></li>
+<li><p><code>sys.executable</code> on Windows now correctly reports the path to the Python executable instead of the launching R executable. (<a href="https://github.com/rstudio/reticulate/issues/1258" class="external-link">#1258</a>)</p></li>
+<li><p>The <code>sys</code> module is no longer automatically imported in <code>__main__</code> by reticulate.</p></li>
+<li><p>Fixed an issue on Windows where reticulate would fail to find Python installations from pyenv installed via scoop.</p></li>
+<li><p>Fixed an issue where <code><a href="../reference/configure_environment.html">configure_environment()</a></code> would error on Windows. (<a href="https://github.com/rstudio/reticulate/issues/1247" class="external-link">#1247</a>)</p></li>
+<li><p>Updated docs for compatibility with HTML5 / R 4.2.</p></li>
+<li><p>Updated r_to_py.sparseMatrix() method for compatibility with Matrix 1.4-2.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.25" id="reticulate-125">reticulate 1.25<small>2022-05-11</small><a class="anchor" aria-label="anchor" href="#reticulate-125"></a></h2>
+<ul><li><p>Fixed an issue where reticulate would fail if R was running embedded under rpy2. reticulate now ensures the Python GIL is acquired before calling into Python. (<a href="https://github.com/rstudio/reticulate/issues/1188" class="external-link">#1188</a>, <a href="https://github.com/rstudio/reticulate/issues/1203" class="external-link">#1203</a>)</p></li>
+<li><p>Fixed an issue where reticulate would fail to bind to an ArcGIS Pro conda environment (<a href="https://github.com/rstudio/reticulate/issues/1200" class="external-link">#1200</a>, <a href="https://github.com/philiporlando" class="external-link">@philiporlando</a>).</p></li>
+<li><p>Fixed an issue where reticulate would fail to bind to an Anaconda base environment on Windows.</p></li>
+<li><p>All commands that create, modify, or delete a Python environment now echo the system command about to be executed. Affected: virtualenv_{create,install,remove} conda_{create,clone,remove,install,update} py_install</p></li>
+<li><p><code><a href="../reference/install_python.html">install_python()</a></code> and <code>create_virtualenv()</code> gain the ability to automatically select the latest patch of a requested Python version. e.g.: <code>install_python("3.9:latest")</code>, <code>create_virtualenv("my-env", version = "3.9:latest")</code></p></li>
+<li><p><code><a href="../reference/install_python.html">install_python()</a></code> <code>version</code> arg gains default value of <code>"3.9:latest"</code>. <code><a href="../reference/install_python.html">install_python()</a></code> can now be called with no arguments.</p></li>
+<li><p>Fixed an issue where reticulate would fail to bind to a conda python if the user didn’t have write permissions to the conda installation (<a href="https://github.com/rstudio/reticulate/issues/1156" class="external-link">#1156</a>).</p></li>
+<li><p>Fixed an issue where reticulate would fail to bind to a conda python if spaces were present in the file path to the associated conda binary (<a href="https://github.com/rstudio/reticulate/issues/1154" class="external-link">#1154</a>).</p></li>
+<li><p><code>use_python(, required = TRUE)</code> now issues a warning if the request will be ignored (<a href="https://github.com/rstudio/reticulate/issues/1150" class="external-link">#1150</a>).</p></li>
+<li><p>New function <code><a href="../reference/py_str.html">py_repr()</a></code> (<a href="https://github.com/rstudio/reticulate/issues/1157" class="external-link">#1157</a>)</p></li>
+<li>
+<p><code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> and related changes (<a href="https://github.com/rstudio/reticulate/issues/1148" class="external-link">#1148</a>, <a href="https://github.com/rstudio/reticulate/issues/1157" class="external-link">#1157</a>):</p>
+<ul><li>The default <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method for Python objects now invokes <code><a href="../reference/py_str.html">py_repr()</a></code> instead of <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code>.</li>
+<li>All Python objects gain a default <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method that invokes <code><a href="../reference/py_str.html">py_str()</a></code>.</li>
 <li>
 <code><a href="../reference/py_str.html">py_str()</a></code> default method no longer strips the object memory address.</li>
+<li>
+<code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> now returns the printed object invisibly, for composability with <code>%&gt;%</code>.</li>
 </ul></li>
 <li>
 <p>Exception handling changes (<a href="https://github.com/rstudio/reticulate/issues/1142" class="external-link">#1142</a>, <a href="https://github.com/t-kalinowski" class="external-link">@t-kalinowski</a>):</p>
@@ -101,12 +283,17 @@
 <li><p>Gains the ability to restore a previous exception if provided in a call <code>py_last_error(previous_error)</code></p></li>
 <li><p>Python traceback objects gain a default <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> S3 method.</p></li>
 </ul></li>
+<li><p>Fixed <code><a href="../reference/r-py-conversion.html">py_to_r()</a></code> for scipy matrices when scipy &gt;= 1.8.0, since sparse matrices are now deprecated.</p></li>
+<li><p>Fixed <code><a href="../reference/r-py-conversion.html">r_to_py()</a></code> for small scipy matrices.</p></li>
 <li><p>New maintainer: Tomasz Kalinowski</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.24" id="reticulate-124">reticulate 1.24<small>2022-01-26</small><a class="anchor" aria-label="anchor" href="#reticulate-124"></a></h2>
-<ul><li><p>Fixed an issue where <code>reticulate</code> would fail to bind to the system version of Python on macOS if command line tools were installed, but Xcode was not. # reticulate 1.23</p></li>
-<li><p><code><a href="../reference/use_python.html">use_condaenv()</a></code> gains the ability to accept an absolute path to a python binary for <code>envname</code>.</p></li>
+<ul><li>Fixed an issue where <code>reticulate</code> would fail to bind to the system version of Python on macOS if command line tools were installed, but Xcode was not.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.23" id="reticulate-123">reticulate 1.23<small>2022-01-14</small><a class="anchor" aria-label="anchor" href="#reticulate-123"></a></h2>
+<ul><li><p><code><a href="../reference/use_python.html">use_condaenv()</a></code> gains the ability to accept an absolute path to a python binary for <code>envname</code>.</p></li>
 <li><p>All python objects gain a <code><a href="https://rdrr.io/r/base/length.html" class="external-link">length()</a></code> method, that returns either <code>py_len(x)</code>, or if that fails, <code>as.integer(py_bool(x))</code>.</p></li>
 <li><p><code><a href="../reference/conda-tools.html">conda_create()</a></code> default for <code>python_version</code> changed from <code>NULL</code> to <code>miniconda_python_version()</code> (presently, 3.8).</p></li>
 <li><p>New function <code><a href="../reference/py_bool.html">py_bool()</a></code>, for evaluating Python “truthiness” of an object.</p></li>
@@ -320,7 +507,7 @@
 <ul><li><p><code><a href="../reference/source_python.html">source_python()</a></code> now flushes stdout and stderr after running the associated Python script, to ensure that <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>-ed output is output to the console. (<a href="https://github.com/rstudio/reticulate/issues/284" class="external-link">#284</a>)</p></li>
 <li><p>Fixed an issue where logical R matrices would not be converted correctly to their NumPy counterpart. (<a href="https://github.com/rstudio/reticulate/issues/280" class="external-link">#280</a>)</p></li>
 <li><p>Fixed an issue where Python chunks containing multiple statements on the same line would be evaluated and printed multiple times.</p></li>
-<li><p>Added <code><a href="../reference/py_get_item.html">py_get_item()</a></code>, <code><a href="../reference/py_set_item.html">py_set_item()</a></code>, and <code><a href="../reference/py_del_item.html">py_del_item()</a></code> as lower-level APIs for directly accessing the items of e.g. a Python dictionary or a Pandas DataFrame.</p></li>
+<li><p>Added <code><a href="../reference/py_get_item.html">py_get_item()</a></code>, <code><a href="../reference/py_get_item.html">py_set_item()</a></code>, and <code><a href="../reference/py_get_item.html">py_del_item()</a></code> as lower-level APIs for directly accessing the items of e.g. a Python dictionary or a Pandas DataFrame.</p></li>
 <li><p>Fix issue with Pandas column names that clash with built in methods (e.g. ‘pop’)</p></li>
 <li><p>Improve default <code><a href="https://rdrr.io/r/utils/str.html" class="external-link">str()</a></code> output for Python objects (print <code>__dict__</code> if available)</p></li>
 </ul></div>
@@ -343,7 +530,7 @@
 <li><p><code><a href="../reference/dict.html">py_dict()</a></code> function to enable creation of dictionaries based on lists of keys and values.</p></li>
 <li><p>Provide default base directory (e.g. ‘~/.virtualenvs’) for environments specified by name in <code><a href="../reference/use_python.html">use_virtualenv()</a></code>.</p></li>
 <li><p>Fail when environment not found with <code>use_condaenv(..., required = TRUE)</code></p></li>
-<li><p>Ensure that <code>use_*</code> python version is satsified when using <code><a href="../reference/eng_python.html">eng_python()</a></code></p></li>
+<li><p>Ensure that <code>use_*</code> python version is satisfied when using <code><a href="../reference/eng_python.html">eng_python()</a></code></p></li>
 <li><p>Forward <code>required</code> argument from <code><a href="../reference/use_python.html">use_virtualenv()</a></code> and <code><a href="../reference/use_python.html">use_condaenv()</a></code></p></li>
 <li><p>Fix leak which occurred when assigning R objects into Python containers</p></li>
 <li><p>Add support for Conda Forge (enabled by default) to <code><a href="../reference/conda-tools.html">conda_install()</a></code></p></li>
@@ -364,7 +551,7 @@
 <li><p>Implement <code>eval</code>, <code>echo</code>, and <code>include</code> knitr chunk options for Python engine</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.3.1" id="reticulate-131">reticulate 1.3.1<small>2017-11-24</small><a class="anchor" aria-label="anchor" href="#reticulate-131"></a></h2>
+<h2 class="page-header" data-toc-text="1.3.1" id="reticulate-131-1">reticulate 1.3.1<small>2017-11-24</small><a class="anchor" aria-label="anchor" href="#reticulate-131-1"></a></h2>
 <ul><li>Bugfix: ensure single-line Python chunks that produce no output still have source code emitted.</li>
 </ul></div>
     <div class="section level2">
@@ -441,7 +628,7 @@
 <ul><li><p>Add <code><a href="../reference/import.html">import_from_path()</a></code> function for importing Python modules from the filesystem.</p></li>
 <li><p>Add <code><a href="../reference/py_discover_config.html">py_discover_config()</a></code> function to determine which versions of Python will be discovered and which one will be used by reticulate.</p></li>
 <li><p>Add <code><a href="../reference/py_function_wrapper.html">py_function_docs()</a></code> amd <code><a href="../reference/py_function_wrapper.html">py_function_wrapper()</a></code> utility functions for scaffolding R wrappers for Python functions.</p></li>
-<li><p>Add <code><a href="../reference/py_last_error.html">py_last_error()</a></code> function for retreiving last Python error.</p></li>
+<li><p>Add <code><a href="../reference/py_last_error.html">py_last_error()</a></code> function for retrieving last Python error.</p></li>
 <li><p>Convert 0-dimension NumPy arrays (scalars) to single element R vectors</p></li>
 <li><p>Convert “callable” Python objects to R functions</p></li>
 <li><p>Automatically add Python bin directory to system PATH for consistent version usage in reticulate and calls to system</p></li>
@@ -464,7 +651,7 @@
 <li><p>Use <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl()</a></code> rather than <code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">endsWith()</a></code> for compatibility with R &lt;= 3.2</p></li>
 <li><p>Use <code>inspect.getmro</code> rather than <code>__bases__</code> for enumerating the base classes of Python objects.</p></li>
 <li><p>Fix <code>PROTECT</code>/<code>UNPROTECT</code> issue detected by CRAN</p></li>
-<li><p>Correct converstion of strings with Unicode characters on Windows</p></li>
+<li><p>Correct conversion of strings with Unicode characters on Windows</p></li>
 <li><p>Fix incompatibility with system-wide Python installations on Windows</p></li>
 <li><p>Fix issue with Python dictionary keys that shared names with primitive R functions (don’t check environment inheritance chain when looking for dictionary key objects by name).</p></li>
 <li><p>Propagate <code>convert</code> parameter for modules with <code>delay_load</code></p></li>
@@ -483,11 +670,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Tomasz, Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

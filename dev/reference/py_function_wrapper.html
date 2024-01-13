@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reticulate</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.24-9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.34.0.9000</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -87,9 +87,9 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">py_function_wrapper</span><span class="op">(</span><span class="va">python_function</span>, r_prefix <span class="op">=</span> <span class="cn">NULL</span>, r_function <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">py_function_docs</span><span class="op">(</span><span class="va">python_function</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">py_function_wrapper</span><span class="op">(</span><span class="va">python_function</span>, r_prefix <span class="op">=</span> <span class="cn">NULL</span>, r_function <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">py_function_docs</span><span class="op">(</span><span class="va">python_function</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,11 +97,16 @@
     <dl><dt>python_function</dt>
 <dd><p>Fully qualified name of Python function or class
 constructor (e.g. <code>tf$layers$average_pooling1d</code>)</p></dd>
+
+
 <dt>r_prefix</dt>
 <dd><p>Prefix to add to generated R function name</p></dd>
+
+
 <dt>r_function</dt>
 <dd><p>Name of R function to generate (defaults to name of Python
 function if not specified)</p></dd>
+
 </dl></div>
     <div id="note">
     <h2>Note</h2>
@@ -120,11 +125,11 @@ that can be used without modification.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Tomasz, Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

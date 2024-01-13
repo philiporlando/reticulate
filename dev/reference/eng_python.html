@@ -20,7 +20,7 @@ Python chunk can be used by later Python chunks."><meta name="robots" content="n
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reticulate</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.24-9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.34.0.9000</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@ Python chunk can be used by later Python chunks."><meta name="robots" content="n
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -93,22 +93,77 @@ Python chunk can be used by later Python chunks.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">eng_python</span><span class="op">(</span><span class="va">options</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">eng_python</span><span class="op">(</span><span class="va">options</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>options</dt>
 <dd><p>Chunk options, as provided by <code>knitr</code> during chunk execution.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The engine can be activated by setting (for example)</p><div class="sourceCode"><pre><code><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/knit_engines.html" class="external-link">knit_engines</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>python <span class="op">=</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="va"><a href="../reference/eng_python.html">eng_python</a></span><span class="op">)</span></code></pre></div>
-
+    <p>The engine can be activated by setting (for example)</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_engines<span class="sc">$</span><span class="fu">set</span>(<span class="at">python =</span> reticulate<span class="sc">::</span>eng_python)</span></code></pre><p></p></div>
 <p>Typically, this will be set within a document's setup chunk, or by the
 environment requesting that Python chunks be processed by this engine.
 Note that <code>knitr</code> (since version 1.18) will use the <code>reticulate</code> engine by
 default when executing Python chunks within an R Markdown document.</p>
+    </div>
+    <div id="supported-knitr-chunk-options">
+    <h2>Supported <code>knitr</code> chunk options</h2>
+    
+
+
+<p>For most options, reticulate's python engine behaves the same as the default
+R engine included in knitr, but they might not support all the same features.
+Options in <em>italic</em> are equivalent to knitr, but with modified behavior.</p><ul><li><p><em><code>eval</code></em> (<code>TRUE</code>, logical): If <code>TRUE</code>, all expressions in the chunk are evaluated. If <code>FALSE</code>,
+no expression is evaluated. Unlike knitr's R engine, it doesn't support numeric
+values indicating the expressions to evaluate.</p></li>
+<li><p><em><code>echo</code></em> (<code>TRUE</code>, logical): Whether to display the source code in the output document. Unlike
+knitr's R engine, it doesn't support numeric values indicating the expressions
+to display.</p></li>
+<li><p><code>results</code> (<code>'markup'</code>, character): Controls how to display the text results. Note that this option only
+applies to normal text output (not warnings, messages, or errors). The behavior
+should be identical to knitr's R engine.</p></li>
+<li><p><code>collapse</code> (<code>FALSE</code>, logical): Whether to, if possible, collapse all the source and output blocks
+from one code chunk into a single block (by default, they are written to separate blocks).
+This option only applies to Markdown documents.</p></li>
+<li><p><code>error</code> (<code>TRUE</code>, logical): Whether to preserve errors. If <code>FALSE</code> evaluation stops
+on errors. (Note that RMarkdown sets it to <code>FALSE</code>).</p></li>
+<li><p><em><code>warning</code></em> (<code>TRUE</code>, logical): Whether to preserve warnings in the output. If FALSE, all warnings
+will be suppressed. Doesn't support indices.</p></li>
+<li><p><code>include</code> (<code>TRUE</code>, logical): Whether to include the chunk output in the output document.
+If <code>FALSE</code>, nothing will be written into the output document, but the code is still
+evaluated and plot files are generated if there are any plots in the chunk, so you
+can manually insert figures later.</p></li>
+<li><p><code>dev</code>: The graphical device to generate plot files. See knitr documentation for
+additional information.</p></li>
+<li><p><code>base.dir</code> (<code>NULL</code>; character): An absolute directory under which the plots
+are generated.</p></li>
+<li><p><code>strip.white</code> (TRUE; logical): Whether to remove blank lines in the beginning
+or end of a source code block in the output.</p></li>
+<li><p><code>dpi</code> (72; numeric): The DPI (dots per inch) for bitmap devices (dpi * inches = pixels).</p></li>
+<li><p><code>fig.width</code>, <code>fig.height</code> (both are 7; numeric): Width and height of the plot
+(in inches), to be used in the graphics device.</p></li>
+<li><p><code>label</code>: The chunk label for each chunk is assumed to be unique within the
+document. This is especially important for cache and plot filenames, because
+these filenames are based on chunk labels. Chunks without labels will be
+assigned labels like unnamed-chunk-i, where i is an incremental number.</p></li>
+</ul><div class="section">
+<h3 id="python-engine-only-options">Python engine only options<a class="anchor" aria-label="anchor" href="#python-engine-only-options"></a></h3>
+
+<ul><li><p><strong><code>jupyter_compat</code></strong> (FALSE, logical): If <code>TRUE</code> then, like in Jupyter notebooks,
+only the last expression in the chunk is printed to the output.</p></li>
+<li><p><strong><code>out.width.px</code></strong>, <strong><code>out.height.px</code></strong> (810, 400, both integers): Width and
+height of the plot in the output document, which can be different with its
+physical <code>fig.width</code> and <code>fig.height</code>, i.e., plots can be scaled in the output
+document. Unlike knitr's <code>out.width</code>, this is always set in pixels.</p></li>
+<li><p><strong><code>altair.fig.width</code></strong>, <strong><code>altair.fig.height</code></strong>: If set, is used instead of
+<code>out.width.px</code> and <code>out.height.px</code> when writing Altair charts.</p></li>
+</ul></div>
+
     </div>
 
   </div>
@@ -119,11 +174,11 @@ default when executing Python chunks within an R Markdown document.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Tomasz, Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

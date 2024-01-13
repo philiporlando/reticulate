@@ -19,7 +19,7 @@ choose the currently-active copy of Python."><meta name="robots" content="noinde
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reticulate</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.24-9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.34.0.9000</span>
       </span>
     </div>
 
@@ -28,7 +28,7 @@ choose the currently-active copy of Python."><meta name="robots" content="noinde
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -91,20 +91,22 @@ choose the currently-active copy of Python.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">py_exe</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">py_exe</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="value">
     <h2>Value</h2>
-    <p>The path to the Python executable <code>reticulate</code> has been configured
+    
+
+<p>The path to the Python executable <code>reticulate</code> has been configured
 to use.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p>This can occasionally be useful if you'd like to interact with Python (or its
 modules) via a subprocess; for example you might choose to install a package
-with <code>pip</code>:</p><div class="sourceCode"><pre><code><span class="fu"><a href="https://rdrr.io/r/base/system2.html" class="external-link">system2</a></span><span class="op">(</span><span class="fu"><a href="../reference/py_exe.html">py_exe</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"-m"</span>, <span class="st">"pip"</span>, <span class="st">"install"</span>, <span class="st">"numpy"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-
+with <code>pip</code>:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system2</span>(<span class="fu">py_exe</span>(), <span class="fu">c</span>(<span class="st">"-m"</span>, <span class="st">"pip"</span>, <span class="st">"install"</span>, <span class="st">"numpy"</span>))</span></code></pre><p></p></div>
 <p>and so you can also have greater control over how these modules are invoked.</p>
     </div>
 
@@ -116,11 +118,11 @@ with <code>pip</code>:</p><div class="sourceCode"><pre><code><span class="fu"><a
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Tomasz, Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

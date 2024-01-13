@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reticulate</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.24-9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.34.0.9000</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -116,85 +116,69 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>Python packages are typically installed from one of two package repositories:</p>
+<p>Python packages are typically installed from one of two package
+repositories:</p>
 <ol style="list-style-type: decimal">
 <li><p><a href="https://pypi.org/" class="external-link">PyPI</a>; or</p></li>
 <li><p><a href="https://conda.io/docs/" class="external-link">Conda</a></p></li>
 </ol>
-<p>Any Python package you install from PyPI or Conda can be used from R with reticulate.</p>
-<p>Each version of Python on your system has its own set of packages and reticulate will automatically find a version of Python that contains the first package that you import from R. If need be you can also configure reticulate to use a <a href="versions.html">specific version</a> of Python.</p>
+<p>Any Python package you install from PyPI or Conda can be used from R
+with reticulate.</p>
+<p>Each installation of Python on your system has its own set of
+packages. How reticulate selects a Python installation, and how you can
+configure the behavior, is described in the <a href="versions.html">version</a> vignette.</p>
 <div class="section level3">
 <h3 id="python-environments">Python environments<a class="anchor" aria-label="anchor" href="#python-environments"></a>
 </h3>
-<p>When installing Python packages it’s typically a good practice to isolate them within a Python environment (a named Python installation that exists for a specific project or purpose). This provides a measure of isolation, so that updating a Python package for one project doesn’t impact other projects.</p>
-<p>The reticulate package includes functions for creating Python environments (either virtualenvs or conda envs) and installing packages within them. Using virtualenvs is supported on Linux and Mac OS X, using Conda environments is supported on all platforms including Windows.</p>
+<p>When installing Python packages it’s best practice to isolate them
+within a Python environment (a named Python installation that exists for
+a specific project or purpose). This provides a measure of isolation, so
+that updating a Python package for one project doesn’t impact other
+projects. The risk for package incompatibilities is significantly higher
+with Python packages than it is with R packages, because unlike CRAN,
+PyPI does not enforce, or even check, if the current versions of
+packages currently available are compatible.</p>
+<p>The reticulate package includes functions for creating Python
+environments (either virtualenvs or conda envs) and installing packages
+within them. Both virtual environments and conda environments are
+supported on all platforms (Linux, macOS, and Windows).</p>
+<p>Note that facilities to create and manage virtual environments
+(commonly refereed to as a “venv”) come with the Python standard
+library, and are the recommended way to create isolated python
+installations. Conda environments are supported as well, but be aware
+that there is the potential for binary incompatibilities between
+packages built by conda and packages built outside of conda (e.g., <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, or <a href="https://packagemanager.posit.co/" class="external-link">PPM</a>).</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="simple-installation">Simple Installation<a class="anchor" aria-label="anchor" href="#simple-installation"></a>
 </h2>
-<p>The reticulate package includes a <code><a href="../reference/py_install.html">py_install()</a></code> function that can be used to install one or more Python packages. The packages will be by default be installed within a virtualenv or Conda environment named “r-reticulate”. For example:</p>
+<p>The reticulate package includes a <code><a href="../reference/py_install.html">py_install()</a></code> function
+that can be used to install one or more Python packages. The packages
+will be by default be installed within a virtualenv or Conda environment
+named “r-reticulate”. For example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/py_install.html">py_install</a></span><span class="op">(</span><span class="st">"pandas"</span><span class="op">)</span></code></pre></div>
-<p>This provides a straightforward high-level interface to package installation and helps encourage the use of a common default environment (“r-reticulate”) across the installation of distinct Python packages.</p>
-<p>There are also functions available for directly managing both Conda and virtualenvs for situations where you want more control over how packages are installed. These functions are covered in the sections below.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/py_install.html">py_install</a></span><span class="op">(</span><span class="st">"pandas"</span><span class="op">)</span></span></code></pre></div>
+<p>This provides a straightforward high-level interface to package
+installation and helps encourage the use of a common default environment
+(“r-reticulate”) across the installation of distinct Python
+packages.</p>
+<p>There are also functions available for directly managing both Conda
+and virtualenvs for situations where you want more control over how
+packages are installed. These functions are covered in the sections
+below.</p>
 </div>
 <div class="section level2">
-<h2 id="conda-installation">Conda installation<a class="anchor" aria-label="anchor" href="#conda-installation"></a>
+<h2 id="virtualenv-installation">Virtualenv installation<a class="anchor" aria-label="anchor" href="#virtualenv-installation"></a>
 </h2>
-<p>The following functions are available for managing Conda environments:</p>
+<p>The following functions are available for managing Python
+virtualenvs:</p>
 <table class="table">
-<thead><tr class="header">
-<th>Function</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td><code><a href="../reference/conda-tools.html">conda_list()</a></code></td>
-<td>List all available conda environments</td>
-</tr>
-<tr class="even">
-<td><code><a href="../reference/conda-tools.html">conda_create()</a></code></td>
-<td>Create a new conda environment</td>
-</tr>
-<tr class="odd">
-<td><code><a href="../reference/conda-tools.html">conda_install()</a></code></td>
-<td>Install a package within a conda environment</td>
-</tr>
-<tr class="even">
-<td><code><a href="../reference/conda-tools.html">conda_remove()</a></code></td>
-<td>Remove individual packages or an entire conda environment</td>
-</tr>
-</tbody>
-</table>
-<p>Here’s an example of using these functions to create an environment, install packages within it, then use the environment from R:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span>
-
-<span class="co"># create a new environment </span>
-<span class="fu"><a href="../reference/conda-tools.html">conda_create</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span>
-
-<span class="co"># install SciPy</span>
-<span class="fu"><a href="../reference/conda-tools.html">conda_install</a></span><span class="op">(</span><span class="st">"r-reticulate"</span>, <span class="st">"scipy"</span><span class="op">)</span>
-
-<span class="co"># import SciPy (it will be automatically discovered in "r-reticulate")</span>
-<span class="va">scipy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"scipy"</span><span class="op">)</span></code></pre></div>
-<p>Note that you may have a given Python package installed in multiple Conda environments, in that case you may want to call the <code><a href="../reference/use_python.html">use_condaenv()</a></code> function to ensure that a specific Conda environment is utilized by reticulate:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span>
-
-<span class="co"># indicate that we want to use a specific condaenv</span>
-<span class="fu"><a href="../reference/use_python.html">use_condaenv</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span>
-
-<span class="co"># import SciPy (will use "r-reticulate" as per call to use_condaenv)</span>
-<span class="va">scipy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"scipy"</span><span class="op">)</span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="virtualenv-installation">virtualenv installation<a class="anchor" aria-label="anchor" href="#virtualenv-installation"></a>
-</h2>
-<p>The following functions are available for managing Python virtualenvs:</p>
-<table class="table">
+<colgroup>
+<col width="31%">
+<col width="68%">
+</colgroup>
 <thead><tr class="header">
 <th>Function</th>
 <th>Description</th>
@@ -218,39 +202,140 @@
 </tr>
 </tbody>
 </table>
-<p>Virtual environments are by default located at <code>~/.virtualenvs</code>. You can change this behavior by defining the <code>WORKON_HOME</code> environment variable.</p>
-<p>Here’s an example of using these functions to create an environment, install packages within it, then use the environment from R:</p>
+<p>Virtual environments are by default located at
+<code>~/.virtualenvs</code>. You can change this behavior by defining
+the <code>WORKON_HOME</code> environment variable.</p>
+<p>Here’s an example of using these functions to create an environment,
+install packages within it, then use the environment from R:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create a new environment </span></span>
+<span><span class="fu"><a href="../reference/virtualenv-tools.html">virtualenv_create</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># install SciPy</span></span>
+<span><span class="fu"><a href="../reference/virtualenv-tools.html">virtualenv_install</a></span><span class="op">(</span><span class="st">"r-reticulate"</span>, <span class="st">"scipy"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import SciPy (it will be automatically discovered in "r-reticulate")</span></span>
+<span><span class="va">scipy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"scipy"</span><span class="op">)</span></span></code></pre></div>
+<p>Note that you may have a given Python package installed in multiple
+environments, in that case you may want to call the
+<code><a href="../reference/use_python.html">use_virtualenv()</a></code> function to ensure that a specific
+virtualenv is utilized by reticulate:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># indicate that we want to use a specific virtualenv</span></span>
+<span><span class="fu"><a href="../reference/use_python.html">use_virtualenv</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import SciPy (will use "r-reticulate" as per call to use_virtualenv)</span></span>
+<span><span class="va">scipy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"scipy"</span><span class="op">)</span></span></code></pre></div>
+<p>Virtual environments are typically derived from (created using) a
+“starter” python installation. That is, there must be a python
+installation already installed on the system before you can create
+virtual environments. You can install a “venv starter” python in a
+variety of ways, however is most convenient:</p>
+<ul>
+<li>On macOS and Windows, visit <a href="https://www.python.org/downloads/" class="external-link uri">https://www.python.org/downloads/</a> and install a suitable
+version for your system.</li>
+<li>On Linux, you can use prebuilt python binaries from <a href="https://github.com/rstudio/python-builds" class="external-link uri">https://github.com/rstudio/python-builds</a>
+</li>
+<li>On all platforms, you can use
+<code><a href="../reference/install_python.html">reticulate::install_python()</a></code>. Note that on macOS and Linux,
+this will build Python from source on your system, which may take up to
+a few minutes.</li>
+</ul>
+<p>There can be multiple versions of Python installed along-side each
+other on a system (for example, Python versions 3.9, 3.10, and 3.11). By
+default, reticulate will use the latest version installed on the system
+for creating the virtualenv. If you have specific version constraints on
+the version of Python required, you can supply those to the
+<code>version</code> argument–for example:
+<code>virtualenv_create(version = "&gt;=3.9")</code></p>
+<p>At anytime, you can see all the available virtualenv starters on your
+system by calling <code>virtualenv_starter(all = TRUE)</code>. If you
+have Python venv starters installed in non-standard locations, you can
+inform reticulate where to look by setting the environment variable
+<code>RETICULATE_VIRTUALENV_STARTER</code>.</p>
+</div>
+<div class="section level2">
+<h2 id="conda-installation">Conda installation<a class="anchor" aria-label="anchor" href="#conda-installation"></a>
+</h2>
+<p>The following functions are available for managing Conda
+environments:</p>
+<table class="table">
+<colgroup>
+<col width="26%">
+<col width="73%">
+</colgroup>
+<thead><tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code><a href="../reference/conda-tools.html">conda_list()</a></code></td>
+<td>List all available conda environments</td>
+</tr>
+<tr class="even">
+<td><code><a href="../reference/conda-tools.html">conda_create()</a></code></td>
+<td>Create a new conda environment</td>
+</tr>
+<tr class="odd">
+<td><code><a href="../reference/conda-tools.html">conda_install()</a></code></td>
+<td>Install a package within a conda environment</td>
+</tr>
+<tr class="even">
+<td><code><a href="../reference/conda-tools.html">conda_remove()</a></code></td>
+<td>Remove individual packages or an entire conda environment</td>
+</tr>
+</tbody>
+</table>
+<p>Here’s an example of using these functions to create an environment,
+install packages within it, then use the environment from R:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span>
-
-<span class="co"># create a new environment </span>
-<span class="fu"><a href="../reference/virtualenv-tools.html">virtualenv_create</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span>
-
-<span class="co"># install SciPy</span>
-<span class="fu"><a href="../reference/virtualenv-tools.html">virtualenv_install</a></span><span class="op">(</span><span class="st">"r-reticulate"</span>, <span class="st">"scipy"</span><span class="op">)</span>
-
-<span class="co"># import SciPy (it will be automatically discovered in "r-reticulate")</span>
-<span class="va">scipy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"scipy"</span><span class="op">)</span></code></pre></div>
-<p>Note that you may have a given Python package installed in multiple environments, in that case you may want to call the <code><a href="../reference/use_python.html">use_virtualenv()</a></code> function to ensure that a specific virtualenv is utilized by reticulate:</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create a new environment </span></span>
+<span><span class="fu"><a href="../reference/conda-tools.html">conda_create</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># install SciPy</span></span>
+<span><span class="fu"><a href="../reference/conda-tools.html">conda_install</a></span><span class="op">(</span><span class="st">"r-reticulate"</span>, <span class="st">"scipy"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import SciPy (it will be automatically discovered in "r-reticulate")</span></span>
+<span><span class="va">scipy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"scipy"</span><span class="op">)</span></span></code></pre></div>
+<p>Note that you may have a given Python package installed in multiple
+Conda environments, in that case you may want to call the
+<code><a href="../reference/use_python.html">use_condaenv()</a></code> function to ensure that a specific Conda
+environment is utilized by reticulate:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span>
-
-<span class="co"># indicate that we want to use a specific virtualenv</span>
-<span class="fu"><a href="../reference/use_python.html">use_virtualenv</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span>
-
-<span class="co"># import SciPy (will use "r-reticulate" as per call to use_virtualenv)</span>
-<span class="va">scipy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"scipy"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># indicate that we want to use a specific condaenv</span></span>
+<span><span class="fu"><a href="../reference/use_python.html">use_condaenv</a></span><span class="op">(</span><span class="st">"r-reticulate"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import SciPy (will use "r-reticulate" as per call to use_condaenv)</span></span>
+<span><span class="va">scipy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"scipy"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="shell-installation">Shell installation<a class="anchor" aria-label="anchor" href="#shell-installation"></a>
 </h2>
-<p>You can also use standard shell installation utilities (<code>pip</code> or <code>conda</code>) to install Python packages:</p>
+<p>You can also use standard shell installation utilities
+(<code>pip</code> or <code>conda</code>) to install Python packages:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install into system level Python</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sudo pip install SciPy</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install into active Conda environment</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda install SciPy</span></code></pre></div>
-<p>When doing this, be sure to make note of which version of Python your package has been installed within, and call <code><a href="../reference/use_python.html">use_python()</a></code> functions as appropriate to ensure that this version is used by reticulate.</p>
+<p>When doing this, be sure to make note of which version of Python your
+package has been installed within, and call <code><a href="../reference/use_python.html">use_python()</a></code>
+functions as appropriate to ensure that this version is used by
+reticulate.</p>
+<p>Alternatively, within <code><a href="../reference/repl_python.html">repl_python()</a></code>, you can prefix
+<code>!</code> to send a shell command, and the version of
+<code>pip</code> or <code>conda</code> used will already be configured
+for the Python installation reticulate is currently using.</p>
+<pre class="shell"><code>!pip install scipy</code></pre>
 </div>
   </div>
 
@@ -266,12 +351,12 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Tomasz, Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
+<p>Developed by Tomasz Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">reticulate</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.24-9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.34.0.9000</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -229,17 +229,9 @@
         </td>
         <td><p>List all attributes of a Python object</p></td>
       </tr><tr><td>
-          <p><code><a href="py_get_item.html">py_get_item()</a></code> </p>
+          <p><code><a href="py_get_item.html">py_get_item()</a></code> <code><a href="py_get_item.html">py_set_item()</a></code> <code><a href="py_get_item.html">py_del_item()</a></code> <code><a href="py_get_item.html">`[`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="py_get_item.html">`[&lt;-`(<i>&lt;python.builtin.object&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Get an item from a Python object</p></td>
-      </tr><tr><td>
-          <p><code><a href="py_set_item.html">py_set_item()</a></code> </p>
-        </td>
-        <td><p>Set an item for a Python object</p></td>
-      </tr><tr><td>
-          <p><code><a href="py_del_item.html">py_del_item()</a></code> </p>
-        </td>
-        <td><p>Delete / remove an item from a Python object</p></td>
+        <td><p>Get/Set/Delete an item from a Python object</p></td>
       </tr><tr><td>
           <p><code><a href="py_call.html">py_call()</a></code> </p>
         </td>
@@ -269,7 +261,7 @@
         </td>
         <td><p>Python Truthiness</p></td>
       </tr><tr><td>
-          <p><code><a href="py_str.html">py_str()</a></code> </p>
+          <p><code><a href="py_str.html">py_repr()</a></code> <code><a href="py_str.html">py_str()</a></code> </p>
         </td>
         <td><p>String representation of a python object.</p></td>
       </tr><tr><td>
@@ -312,6 +304,14 @@
           <p><code><a href="py_function_custom_scaffold.html">py_function_custom_scaffold()</a></code> </p>
         </td>
         <td><p>Custom Scaffolding of R Wrappers for Python Functions</p></td>
+      </tr><tr><td>
+          <p><code><a href="nameOfClass.python.builtin.type.html">nameOfClass(<i>&lt;python.builtin.type&gt;</i>)</a></code> </p>
+        </td>
+        <td><p><code><a href="https://rdrr.io/r/base/class.html" class="external-link">nameOfClass()</a></code> for Python objects</p></td>
+      </tr><tr><td>
+          <p><code><a href="Ops-python-methods.html">`==`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`!=`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`&lt;`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`&gt;`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`&gt;=`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`&lt;=`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`+`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`-`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`*`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`/`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`%/%`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`%%`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`^`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`&amp;`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`|`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`!`(<i>&lt;python.builtin.object&gt;</i>)</a></code> <code><a href="Ops-python-methods.html">`%*%`(<i>&lt;python.builtin.object&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>S3 Ops Methods for Python Objects</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="package-installation">Package Installation <a href="#package-installation" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
@@ -329,11 +329,11 @@
         </td>
         <td><p>Configure a Python Environment</p></td>
       </tr><tr><td>
-          <p><code><a href="virtualenv-tools.html">virtualenv_create()</a></code> <code><a href="virtualenv-tools.html">virtualenv_install()</a></code> <code><a href="virtualenv-tools.html">virtualenv_remove()</a></code> <code><a href="virtualenv-tools.html">virtualenv_list()</a></code> <code><a href="virtualenv-tools.html">virtualenv_root()</a></code> <code><a href="virtualenv-tools.html">virtualenv_python()</a></code> <code><a href="virtualenv-tools.html">virtualenv_exists()</a></code> </p>
+          <p><code><a href="virtualenv-tools.html">virtualenv_create()</a></code> <code><a href="virtualenv-tools.html">virtualenv_install()</a></code> <code><a href="virtualenv-tools.html">virtualenv_remove()</a></code> <code><a href="virtualenv-tools.html">virtualenv_list()</a></code> <code><a href="virtualenv-tools.html">virtualenv_root()</a></code> <code><a href="virtualenv-tools.html">virtualenv_python()</a></code> <code><a href="virtualenv-tools.html">virtualenv_exists()</a></code> <code><a href="virtualenv-tools.html">virtualenv_starter()</a></code> </p>
         </td>
         <td><p>Interface to Python Virtual Environments</p></td>
       </tr><tr><td>
-          <p><code><a href="conda-tools.html">conda_list()</a></code> <code><a href="conda-tools.html">conda_create()</a></code> <code><a href="conda-tools.html">conda_clone()</a></code> <code><a href="conda-tools.html">conda_export()</a></code> <code><a href="conda-tools.html">conda_remove()</a></code> <code><a href="conda-tools.html">conda_install()</a></code> <code><a href="conda-tools.html">conda_binary()</a></code> <code><a href="conda-tools.html">conda_exe()</a></code> <code><a href="conda-tools.html">conda_version()</a></code> <code><a href="conda-tools.html">conda_update()</a></code> <code><a href="conda-tools.html">conda_python()</a></code> </p>
+          <p><code><a href="conda-tools.html">conda_list()</a></code> <code><a href="conda-tools.html">conda_create()</a></code> <code><a href="conda-tools.html">conda_clone()</a></code> <code><a href="conda-tools.html">conda_export()</a></code> <code><a href="conda-tools.html">conda_remove()</a></code> <code><a href="conda-tools.html">conda_install()</a></code> <code><a href="conda-tools.html">conda_binary()</a></code> <code><a href="conda-tools.html">conda_exe()</a></code> <code><a href="conda-tools.html">conda_version()</a></code> <code><a href="conda-tools.html">conda_update()</a></code> <code><a href="conda-tools.html">conda_python()</a></code> <code><a href="conda-tools.html">conda_search()</a></code> <code><a href="conda-tools.html">condaenv_exists()</a></code> </p>
         </td>
         <td><p>Conda Tools</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
@@ -365,11 +365,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Tomasz, Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
+  <p></p><p>Developed by Tomasz Kalinowski, Kevin Ushey, JJ Allaire, RStudio, Yuan Tang.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
